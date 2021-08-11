@@ -1,4 +1,4 @@
-# kittens
+# kitten
 React Native test task with cute kittens.
 
 ## Table of Contents
