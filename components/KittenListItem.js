@@ -5,10 +5,10 @@ import { Image, StyleSheet, View } from 'react-native';
 const KittenListItem = ({ item, navigation }) => {
   const imageWidth = Dimensions.get('window').width;
   const imageHeight = Dimensions.get('window').height;
-  const { tags, webformatURL, likes, comments, largeImageURL } = item;
+  const { tags, webformatURL, likes, comments, largeImageURL, name, user } = item;
 
   const handleGoToDetails = () => {
-    navigation.navigate('Kitten', { largeImageURL });
+    navigation.navigate('Kitten', { name, tags, largeImageURL, user });
   };
 
   return (
@@ -23,6 +23,7 @@ const KittenListItem = ({ item, navigation }) => {
           />
         </View>
         <View>
+          <Text style={styles.text}>{'Name: ' + name}</Text>
           <Text style={styles.text}>{'Tags: ' + tags}</Text>
           <Text style={styles.text}>{'Likes: ' + likes}</Text>
           <Text style={styles.text}>{'Comments: ' + comments}</Text>

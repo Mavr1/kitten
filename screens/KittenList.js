@@ -1,41 +1,49 @@
-import React, { useEffect, useState } from 'react';
-import { View, Button, StyleSheet, FlatList } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import {
+  View,
+  Button,
+  StyleSheet,
+  FlatList,
+  ActivityIndicator,
+} from 'react-native';
+import { useSelector } from 'react-redux';
 import KittenListItem from '../components/KittenListItem';
-import { getKittensOperation } from '../redux/kittensOperations';
 
 export default function KittenList({ navigation }) {
-  const dispatch = useDispatch();
-  const kittens = useSelector(({ kittens }) => kittens.data);
+  const { data, isLoading } = useSelector(({ kittens }) => kittens) || [];
 
   const [perPage, setperPage] = useState(10);
 
-  useEffect(() => {
-    dispatch(getKittensOperation(perPage));
-  }, [perPage]);
-
   return (
     <View style={styles.container}>
-      <View style={styles.filterContainer}>
-        <View style={styles.filterBtnContainer}>
-          <Button title="10" onPress={() => setperPage(10)} />
+      {isLoading ? (
+        <View style={styles.indicatorContainer}>
+          <ActivityIndicator color="#4444ff" size="large" />
         </View>
-        <View style={styles.filterBtnContainer}>
-          <Button title="20" onPress={() => setperPage(20)} />
-        </View>
-        <View style={styles.filterBtnContainer}>
-          <Button title="40" onPress={() => setperPage(10)} />
-        </View>
-      </View>
-      <View style={styles.listContainer}>
-        <FlatList
-          data={kittens}
-          renderItem={({ item }) => (
-            <KittenListItem item={item} navigation={navigation} />
-          )}
-          keyExtractor={(item) => item.id.toString()}
-        />
-      </View>
+      ) : (
+        <>
+          <View style={styles.filterContainer}>
+            <View style={styles.filterBtnContainer}>
+              <Button title="10" onPress={() => setperPage(10)} />
+            </View>
+            <View style={styles.filterBtnContainer}>
+              <Button title="20" onPress={() => setperPage(20)} />
+            </View>
+            <View style={styles.filterBtnContainer}>
+              <Button title="40" onPress={() => setperPage(40)} />
+            </View>
+          </View>
+          <View style={styles.listContainer}>
+            <FlatList
+              data={data.filter((k, idx) => idx < perPage)}
+              renderItem={({ item }) => (
+                <KittenListItem item={item} navigation={navigation} />
+              )}
+              keyExtractor={(item) => item.id.toString()}
+            />
+          </View>
+        </>
+      )}
     </View>
   );
 }
@@ -45,6 +53,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     paddingHorizontal: 16,
+  },
+
+  indicatorContainer: {
+    flex: 1,
+    justifyContent: 'center',
   },
 
   filterContainer: {
