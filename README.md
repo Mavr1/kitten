@@ -18,7 +18,7 @@ SDK Version: 42.0.0
 * Watch details and big image
 
 ## Installing
-1. Install Expo to your smartfon:
+1. Install Expo on your smartfon:
     1. for Android: https://play.google.com/store/apps/details?id=host.exp.exponent
     1. for iOS: https://apps.apple.com/us/app/expo-go/id982107779
 
