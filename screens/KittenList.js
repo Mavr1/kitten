@@ -1,26 +1,32 @@
 import React, { useState } from 'react';
 import {
   View,
+  Text,
   Button,
   StyleSheet,
   FlatList,
   ActivityIndicator,
 } from 'react-native';
 import { useSelector } from 'react-redux';
+import { useNetInfo } from '@react-native-community/netinfo';
+
 import KittenListItem from '../components/KittenListItem';
 
 export default function KittenList({ navigation }) {
   const { data, isLoading } = useSelector(({ kittens }) => kittens) || [];
+  const netInfo = useNetInfo();
 
   const [perPage, setperPage] = useState(10);
-
+  const isConnected = !!netInfo.isConnected;
   return (
     <View style={styles.container}>
-      {isLoading ? (
+      {!isConnected && <Text>No internet connection</Text>}
+      {isConnected && isLoading && (
         <View style={styles.indicatorContainer}>
           <ActivityIndicator color="#4444ff" size="large" />
         </View>
-      ) : (
+      )}
+      {isConnected && !isLoading && (
         <>
           <View style={styles.filterContainer}>
             <View style={styles.filterBtnContainer}>

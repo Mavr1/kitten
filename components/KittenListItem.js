@@ -5,7 +5,8 @@ import { Image, StyleSheet, View } from 'react-native';
 const KittenListItem = ({ item, navigation }) => {
   const imageWidth = Dimensions.get('window').width;
   const imageHeight = Dimensions.get('window').height;
-  const { tags, webformatURL, likes, comments, largeImageURL, name, user } = item;
+  const { tags, webformatURL, likes, comments, largeImageURL, name, user } =
+    item;
 
   const handleGoToDetails = () => {
     navigation.navigate('Kitten', { name, tags, largeImageURL, user });
@@ -17,9 +18,7 @@ const KittenListItem = ({ item, navigation }) => {
         <View style={styles.imageContainer}>
           <Image
             source={{ uri: webformatURL }}
-            style={styles.image}
-            width={imageWidth * 0.8}
-            height={imageHeight * 0.3}
+            style={{ width: imageWidth * 0.8, height: imageHeight * 0.3 }}
           />
         </View>
         <View>
