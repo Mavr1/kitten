@@ -1,8 +1,12 @@
-# kitten
+# kittens
 React Native test task with cute kittens.
 
 ## Table of Contents
 * [Info](https://github.com/Mavr1/kitten#info)
+* [Features](https://github.com/Mavr1/kitten#features)
+* [Installing](https://github.com/Mavr1/kitten#installing)
+* [Libraries](https://github.com/Mavr1/kitten#libraries)
+* [Links](https://github.com/Mavr1/kitten#links)
 
 ## Info
 SDK Version: 42.0.0
@@ -22,7 +26,7 @@ SDK Version: 42.0.0
 1. Open the camera app on your device and scan the QR code from the screen of desktop (laptop)
 1. Or, open this link on your device to preview channel: exp://exp.host/@mavrodii/kitten
 
-## Used libraries
+## Libraries
 * Redux (@reduxjs/toolkit) for state managment
 * Axios for http requests
 
